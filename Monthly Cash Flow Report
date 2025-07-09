@@ -1,0 +1,18 @@
+-- Query Name: Monthly Cash Flow Report
+-- Description: This query calculates total inflows, outflows, net cash flow, and cumulative cash 
+-- position by month using data from the cash_flow table. Useful for visualizing liquidity trends 
+-- and managing working capital over time.
+
+SELECT
+    strftime('%Y-%m', date) AS Month,
+    SUM(CASE WHEN type = 'inflow' THEN amount ELSE 0 END) AS Total_Inflows,
+    SUM(CASE WHEN type = 'outflow' THEN amount ELSE 0 END) AS Total_Outflows,
+    SUM(CASE WHEN type = 'inflow' THEN amount ELSE 0 END) -
+    SUM(CASE WHEN type = 'outflow' THEN amount ELSE 0 END) AS Net_Cash_Flow,
+    SUM(
+        SUM(CASE WHEN type = 'inflow' THEN amount ELSE 0 END) -
+        SUM(CASE WHEN type = 'outflow' THEN amount ELSE 0 END)
+    ) OVER (ORDER BY strftime('%Y-%m', date)) AS Cumulative_Cash
+FROM cash_flow
+GROUP BY strftime('%Y-%m', date)
+ORDER BY Month DESC;
