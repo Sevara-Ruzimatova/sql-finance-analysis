@@ -1,0 +1,12 @@
+-- Expense Breakdown by Category for the Year
+-- Performed by: Sevarakhon | Date: 2025-07-02
+
+SELECT 
+    Category AS Category,
+    SUM(amount) AS Total_spent
+FROM 
+    expenses
+GROUP BY 
+    category
+ORDER BY 
+    total_spent DESC;
