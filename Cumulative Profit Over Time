@@ -1,0 +1,29 @@
+-- Query: Monthly Cumulative Profit
+-- Description: Cumulative profit up to the current month 
+-- Performed by: Sevarakhon 
+-- Date: 2025-07-09
+SELECT
+    strftime('%Y-%m', r.date) AS Month,
+    SUM(r.amount) AS Total_revenue,
+    (
+        SELECT SUM(e.amount)
+        FROM expenses e
+        WHERE strftime('%Y-%m', e.date) = strftime('%Y-%m', r.date)
+    ) AS Total_expenses,
+    SUM(r.amount) -
+    (
+        SELECT SUM(e.amount)
+        FROM expenses e
+        WHERE strftime('%Y-%m', e.date) = strftime('%Y-%m', r.date)
+    ) AS Profit,
+    SUM(
+        SUM(r.amount) -
+        (
+            SELECT SUM(e.amount)
+            FROM expenses e
+            WHERE strftime('%Y-%m', e.date) = strftime('%Y-%m', r.date)
+        )
+    ) OVER (ORDER BY strftime('%Y-%m', r.date)) AS Cumulative_profit
+FROM revenues r
+GROUP BY strftime('%Y-%m', r.date)
+ORDER BY month;
