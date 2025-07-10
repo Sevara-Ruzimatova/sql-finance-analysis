@@ -14,8 +14,11 @@ Each file includes a focused query with clear documentation.
 
 File	Description
 Monthly Net Profit.sql	Calculates monthly revenue, expenses, and net profit.
+
 Cumulative Profit Over Time.sql	Tracks cumulative profit across the fiscal year.
+
 Expense Breakdown by Category.sql	Analyzes expenses by category over time.
+
 Monthly Cash Flow Report.sql	Generates a monthly report of cash inflows and outflows.
 
 Purpose
