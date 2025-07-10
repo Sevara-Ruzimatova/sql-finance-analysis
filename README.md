@@ -1,4 +1,4 @@
-# sql-finance-analysis
+# SQL-Finance-Analysis
 A portfolio project analyzing financial data with SQL
 This project presents a series of SQL queries developed for analyzing business financial data. It demonstrates the use of structured queries to extract insights from transactional records and is intended as part of a professional freelance portfolio.
 
